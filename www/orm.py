@@ -1,5 +1,19 @@
+'''
+关键知识点：
+ORM的概念：
+ORM（Object Relational Mapping）框架采用元数据来描述对象一关系映射细节，元数据一般采用XML格式，
+并且存放在专门的对象一映射文件中。
+只要提供了持久化类与表的映射关系，ORM框架在运行时就能参照映射文件的信息，把对象持久化到数据库中。
+当前ORM框架主要有五种：Hibernate(Nhibernate)，iBATIS，mybatis，EclipseLink，JFinal。
+orm.py做的是类似的事情，实现对数据库操作的封装
+
+协程函数：async def
+'''
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+
 
 __author__ = 'Michael Liao'
 
@@ -34,6 +48,12 @@ async def create_pool(loop, **kw):
 '''
 select函数封装，注意要始终坚持使用带参数的SQL，而不是自己拼接SQL字符串，这样可\
 以防止SQL注入攻击。？？？
+'''
+
+'''
+通过async，把一个函数定义为协程函数，支撑异步操作，协程（coroutine）：协程，又称微线程，纤程。英文名Coroutine。
+协程的概念很早就提出来了，但直到最近几年才在某些语言（如Lua）中得到广泛应用。
+https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432090171191d05dae6e129940518d1d6cf6eeaaa969000
 '''
 
 
@@ -94,6 +114,11 @@ class Field(object):
 
     def __str__(self):
         return '<%s, %s:%s>' % (self.__class__.__name__, self.column_type, self.name)
+
+
+'''
+提供数据库内类型与python类型的转换
+'''
 
 
 class StringField(Field):
@@ -212,7 +237,7 @@ class Model(dict, metaclass=ModelMetaclass):
     @classmethod
     async def findAll(cls, where=None, args=None, **kw):
         ' find objects by where clause. '
-        #注意，这里的cls.__select__调用的是ModelMetaclass提供的select方法
+        # 注意，这里的cls.__select__调用的是ModelMetaclass提供的select方法
         sql = [cls.__select__]
         if where:
             sql.append('where')
@@ -240,7 +265,7 @@ class Model(dict, metaclass=ModelMetaclass):
     @classmethod
     async def findNumber(cls, selectField, where=None, args=None):
         ' find number by select and where. '
-        #通过cls来调用ModelMetaclass封装的属性和方法
+        # 通过cls来调用ModelMetaclass封装的属性和方法
         sql = ['select %s _num_ from `%s`' % (selectField, cls.__table__)]
         if where:
             sql.append('where')
