@@ -6,12 +6,12 @@ https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c
 
 程序目录结构：
 
-- awesome-python3-webapp/  <-- 根目录
-    - backup/               <-- 备份目录
-    - conf/                 <-- 配置文件
-    - dist/                 <-- 打包目录
-    - www/                  <-- Web目录，存放.py文件
-        - static/            <-- 存放静态文件
-        - templates/         <-- 存放模板文件
-    - ios/                  <-- 存放iOS App工程
-    - LICENSE               <-- 代码LICENSE
+    - awesome-python3-webapp/  <-- 根目录
+        - backup/               <-- 备份目录
+        - conf/                 <-- 配置文件
+        - dist/                 <-- 打包目录
+        - www/                  <-- Web目录，存放.py文件
+            - static/            <-- 存放静态文件
+            - templates/         <-- 存放模板文件
+        - ios/                  <-- 存放iOS App工程
+        - LICENSE               <-- 代码LICENSE
